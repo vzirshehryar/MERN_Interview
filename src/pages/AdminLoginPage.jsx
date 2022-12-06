@@ -34,7 +34,9 @@ const AdminLoginPage = () => {
       return;
     const message = sdk.login(register("email"), register("password"), "admin");
     dispatch(message);
-    return <SnackBar/>
+    // return <SnackBar/>
+    const navigate = useNavigate();
+    navigate(`/${message.user_id}`)
   };
 
   return (
