@@ -22,7 +22,10 @@ export default function MkdSDK() {
     }
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-project': "cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==",
+        },
         body
     };
 
@@ -30,7 +33,7 @@ export default function MkdSDK() {
       const response = await fetch('https://reacttask.mkdlabs.com/v2/api/lambda/login', requestOptions);
       const data = await response.json();
       if(!data.error)
-        localStorage.setItem('itemName', value)
+        localStorage.setItem('token', value)
         return data;
     }
     catch(error){
@@ -110,6 +113,26 @@ export default function MkdSDK() {
 
   this.check = async function (role) {
     //TODO
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-project': "cmVhY3R0YXNrOjVmY2h4bjVtOGhibzZqY3hpcTN4ZGRvZm9kb2Fjc2t5ZQ==",
+        'Bearer': `<${localStorage.getItem('token')}>`
+      },
+      body: {"role": "admin"}
+  };
+  try{
+    const response = await fetch('https://reacttask.mkdlabs.com/v2/api/lambda/check', requestOptions);
+    const data = await response.json();
+    if(data.status == 200)
+      return true;
+    return false;
+  }
+  catch(error){
+    console.log(error)
+    return false;
+  }
   };
 
   return this;
