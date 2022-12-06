@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 const AdminDashboardPage = () => {
-  const [video, setVideo] = useState([{"Loading"}]);
+  const [video, setVideo] = useState(["Loading"]);
   const [error, setError] = useState(true);
 
 
@@ -40,10 +40,10 @@ const AdminDashboardPage = () => {
         {
           error || video.map((item)=>{
             <>
-              <div>{item.username}</div>
-              <div>{item.title}</div>
-              <div><img src={item.photo} alt="any"/>"</div>
-              <div>{item.like}</div>
+              <div>{item.list[item].username}</div>
+              <div>{item.list[item].title}</div>
+              <div><img src={item.list[item].photo} alt="any"/>"</div>
+              <div>{item.list[item].like}</div>
             </>
           })
         }
