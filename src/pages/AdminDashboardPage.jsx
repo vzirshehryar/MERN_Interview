@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Navigate, useNavigate } from "react-router";
 
 const AdminDashboardPage = () => {
   const [video, setVideo] = useState(["Loading"]);
@@ -49,6 +50,11 @@ const AdminDashboardPage = () => {
     else
       setPage(page+1);
   }
+  const logout = ()=>{
+    localStorage.clear();
+    const navigate = useNavigate();
+    navigate("/");
+  }
 
   return (
     <>
@@ -65,6 +71,7 @@ const AdminDashboardPage = () => {
             </>
           })
         }
+        <div><button onClick={logout}>LOGOUT</button></div>
       </div>
     </>
   );
