@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
@@ -28,6 +28,11 @@ const AdminLoginPage = () => {
   const onSubmit = async (data) => {
     let sdk = new MkdSDK();
     //TODO
+    data.preventDefault()
+    if(!register("email") || !register("password"))
+      return;
+    const message = sdk.login(register("email"), register("password"), "admin");
+    dispatch(message);
   };
 
   return (
