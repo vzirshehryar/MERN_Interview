@@ -48,6 +48,11 @@ const AuthProvider = ({ children }) => {
 
   React.useEffect(() => {
     //TODO
+    if(localStorage.getItem('token'))
+      dispatch("LOGIN")
+    else
+      dispatch("LOGOUT")
+      
   }, []);
 
   return (
