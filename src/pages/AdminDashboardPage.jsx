@@ -5,6 +5,8 @@ import { useEffect } from "react";
 const AdminDashboardPage = () => {
   const [video, setVideo] = useState(["Loading"]);
   const [error, setError] = useState(true);
+  const [page, setPage] = useState(1);
+
 
 
   useEffect(()=>{
@@ -17,7 +19,7 @@ const AdminDashboardPage = () => {
             Bearer: `<${localStorage.getItem("token")}>`,
             body: {
                 "payload": {},
-                "page": 1,
+                "page": page,
                 "limit": 10
             }
           }
@@ -33,10 +35,26 @@ const AdminDashboardPage = () => {
       }
     }
     fetchData();
-  }, [])
+  }, [page])
+
+  const previous = ()=>{
+    if(page == 1)
+      return;
+    else
+      setPage(page-1);
+  }
+  const next = ()=>{
+    if(page == 10)
+      return;
+    else
+      setPage(page+1);
+  }
+
   return (
     <>
       <div className="w-full flex justify-center items-center text-7xl h-screen text-gray-700 ">
+        <button onClick={previous}>previous 10</button>
+        <button onClick={next}>next 10</button>
         {
           error || video.map((item)=>{
             <>
